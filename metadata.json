@@ -1,0 +1,22 @@
+{
+  "KPlugin": {
+    "Authors": [
+      {
+        "Email": "ruan.lj@foxmail.com",
+        "Name": "ruan.lj"
+      }
+    ],
+    "Description": "Auto active window when demands attention",
+    "Description[zh_CN]": "当窗口任务栏图标高亮且窗口未激活时，自动激活窗口",
+    "Icon": "preferences-system-windows-script-test",
+    "Id": "auto-active",
+    "License": "GPL",
+    "Name": "Auto Active",
+    "Name[zh_CN]": "自动激活窗口",
+    "Version": "0.0.1"
+  },
+  "X-KDE-ConfigModule": "kwin/effects/configs/kcm_kwin4_genericscripted",
+  "X-Plasma-API": "javascript",
+  "X-Plasma-MainScript": "code/main.js",
+  "KPackageStructure": "KWin/Script"
+}

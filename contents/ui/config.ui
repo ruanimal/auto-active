@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+  <class>KWin::AutoActiveConfigForm</class>
+  <widget class="QWidget" name="KWin::AutoActiveConfigForm">
+    <property name="geometry">
+      <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>334</width>
+        <height>59</height>
+      </rect>
+    </property>
+    <property name="windowTitle">
+      <string>Auto Active</string>
+    </property>
+    <layout class="QFormLayout" name="formLayout">
+      <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item row="0" column="1">
+            <widget class="QLabel" name="applyLabel">
+              <property name="text">
+                <string>ignore window:</string>
+              </property>
+            </widget>
+          </item>
+          <item row="0" column="1">
+            <widget class="QLineEdit" name="kcfg_Ignorelist">
+              <property name="text">
+                <string>org.kde.krdc</string>
+              </property>
+              <property name="placeholderText">
+                <string>Comma separated list of app desktopFileName</string>
+              </property>
+              <property name="minimumSize">
+                <size>
+                  <width>500</width>
+                  <height>0</height>
+                </size>
+              </property>
+            </widget>
+          </item>
+          <item>
+            <widget class="QLabel" name="applyLabel">
+              <property name="visible">
+                <bool>false</bool>
+              </property>
+              <property name="text">
+                <string>All</string>
+              </property>
+            </widget>
+          </item>
+        </layout>
+      </item>
+    </layout>
+  </widget>
+  <resources />
+  <connections>
+  </connections>
+</ui>
