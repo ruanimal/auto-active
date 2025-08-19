@@ -1,14 +1,10 @@
-const Ignorelist = readConfig("Ignorelist", "an.app.placeholder.name").toString().toLowerCase().split(",");
+const Blacklist = readConfig("Blacklist", "an.app.placeholder.name").toString().toLowerCase().split(",");
+const Whitelist = readConfig("Whitelist", "an.app.placeholder.name").toString().toLowerCase().split(",");
+const WhiteMode = readConfig("White", false);
 var lastActiveTime = 0;
 
 function log(message) {
-    print(`[Auto Active] ${message}`);
-}
-
-function bindArg(fn, ...args) {
-    return function (...innerArgs) {
-        return fn.apply(this, [...args, ...innerArgs]);
-    };
+    console.info(`[Auto Active] ${message}`);
 }
 
 function callback(window) {
@@ -21,30 +17,32 @@ function callback(window) {
         workspace.activeWindow = window;
         window.demandsAttention = false;
         lastActiveTime = now;
-        log(`active app caption: ${window.caption}, layer: ${window.layer},` +
-            ` desktopFileName: ${window.desktopFileName}, resourceClass: ${window.resourceClass}`);
+        log(`active app caption: ${window.caption}, resourceClass: ${window.resourceClass}`);
     }
 }
 
 function isSkipped(window) {
-    const resourceClass = window.desktopFileName || window.resourceClass || "";
-    const isIgnored = resourceClass && Ignorelist.includes(resourceClass.toString().toLowerCase());
-    return !window.normalWindow || !window.caption || isIgnored;
+    const resourceClass = window.resourceClass.toString().toLowerCase() || "";
+    if (WhiteMode) {
+        return !Whitelist.includes(resourceClass);
+    }
+    const isBlacked = resourceClass && Blacklist.includes(resourceClass.toString().toLowerCase());
+    return !window.normalWindow || isBlacked;
 }
 
 function addWindowCallback(window) {
     if (isSkipped(window)) {
         return;
     }
-    log(`add callback for: ${window.caption} (${window.desktopFileName} | ${window.resourceClass})`);
-    window.demandsAttentionChanged.connect(bindArg(callback, window));
+    log(`add callback for: ${window.caption} (${window.resourceClass})`);
+    window.demandsAttentionChanged.connect(() => callback(window));
 }
 
 // 监听窗口添加事件
 workspace.windowAdded.connect(addWindowCallback);
 
 // 初始化时检查一次
-log(`running, Ignorelist: ${Ignorelist}`);
+log(`running, WhiteMode: ${WhiteMode}, Whitelist: ${Whitelist}, Blacklist: ${Blacklist}`);
 for (let w of workspace.windowList()) {
     if (!isSkipped(w)) {
         callback(w);

@@ -14,46 +14,55 @@
       <string>Auto Active</string>
     </property>
     <layout class="QFormLayout" name="formLayout">
-      <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
-          <item row="0" column="1">
-            <widget class="QLabel" name="applyLabel">
-              <property name="text">
-                <string>ignore window:</string>
-              </property>
-            </widget>
-          </item>
-          <item row="0" column="1">
-            <widget class="QLineEdit" name="kcfg_Ignorelist">
-              <property name="text">
-                <string>an.app.placeholder.name</string>
-              </property>
-              <property name="placeholderText">
-                <string>Comma separated list of app desktopFileName</string>
-              </property>
-              <property name="minimumSize">
-                <size>
-                  <width>500</width>
-                  <height>0</height>
-                </size>
-              </property>
-            </widget>
-          </item>
-          <item>
-            <widget class="QLabel" name="applyLabel">
-              <property name="visible">
-                <bool>false</bool>
-              </property>
-              <property name="text">
-                <string>All</string>
-              </property>
-            </widget>
-          </item>
-        </layout>
+      <item row="0" column="0">
+        <widget class="QCheckBox" name="kcfg_White">
+          <property name="text">
+            <string>Whitelist</string>
+          </property>
+        </widget>
+      </item>
+      <item row="0" column="1">
+        <widget class="QLineEdit" name="kcfg_Whitelist">
+          <property name="text">
+            <string>an.app.placeholder.name</string>
+          </property>
+          <property name="placeholderText">
+            <string>Comma separated list of app resourceClass</string>
+          </property>
+        </widget>
+      </item>
+      <item row="1" column="0">
+        <widget class="QCheckBox" name="kcfg_Black">
+          <property name="text">
+            <string>Blacklist </string>
+          </property>
+        </widget>
+      </item>
+      <item row="1" column="1">
+        <widget class="QLineEdit" name="kcfg_Blacklist">
+          <property name="text">
+            <string>an.app.placeholder.name</string>
+          </property>
+          <property name="placeholderText">
+            <string>Comma separated list of app resourceClass</string>
+          </property>
+        </widget>
       </item>
     </layout>
   </widget>
   <resources />
   <connections>
+  <connection>
+   <sender>kcfg_White</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>kcfg_Black</receiver>
+   <slot>setDisabled(bool)</slot>
+  </connection>
+  <connection>
+   <sender>kcfg_White</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>kcfg_Blacklist</receiver>
+   <slot>setDisabled(bool)</slot>
+  </connection>
   </connections>
 </ui>

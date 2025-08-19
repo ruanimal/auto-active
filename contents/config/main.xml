@@ -5,7 +5,16 @@
       http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
   <kcfgfile name=""/>
   <group name="">
-    <entry name="Ignorelist" type="string">
+    <entry name="Black" type="Bool">
+      <default>false</default>
+    </entry>
+    <entry name="Blacklist" type="String">
+      <default>an.app.placeholder.name</default>
+    </entry>
+    <entry name="White" type="Bool">
+      <default>false</default>
+    </entry>
+    <entry name="Whitelist" type="String">
       <default>an.app.placeholder.name</default>
     </entry>
   </group>
