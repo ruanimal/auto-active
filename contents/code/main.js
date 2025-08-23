@@ -1,6 +1,7 @@
 const Blacklist = readConfig("Blacklist", "an.app.placeholder.name").toString().toLowerCase().split(",");
 const Whitelist = readConfig("Whitelist", "an.app.placeholder.name").toString().toLowerCase().split(",");
 const WhiteMode = readConfig("White", false);
+const BlackMode = readConfig("Black", false);
 var lastActiveTime = 0;
 
 function log(message) {
@@ -26,7 +27,7 @@ function isSkipped(window) {
     if (WhiteMode) {
         return !Whitelist.includes(resourceClass);
     }
-    const isBlacked = resourceClass && Blacklist.includes(resourceClass.toString().toLowerCase());
+    const isBlacked = resourceClass && BlackMode && Blacklist.includes(resourceClass.toString().toLowerCase());
     return !window.normalWindow || isBlacked;
 }
 
@@ -42,7 +43,7 @@ function addWindowCallback(window) {
 workspace.windowAdded.connect(addWindowCallback);
 
 // 初始化时检查一次
-log(`running, WhiteMode: ${WhiteMode}, Whitelist: ${Whitelist}, Blacklist: ${Blacklist}`);
+log(`running, WhiteMode: ${WhiteMode}, Whitelist: ${Whitelist}, BlackMode: ${BlackMode}, Blacklist: ${Blacklist}`);
 for (let w of workspace.windowList()) {
     if (!isSkipped(w)) {
         callback(w);
