@@ -9,12 +9,12 @@ Supports both blacklist and whitelist modes, with whitelist mode taking priority
 
 You can configure windows to be ignored (blacklist) or windows for which the script should take effect (whitelist).
 
-Use a comma-separated list of application `resourceClass` names.
+Use a comma-separated list of application `resourceClass` names without spaces between them.
 You can check these values via `journalctl`.
 
 After editing the configuration, disable and re-enable the plugin for changes to take effect.
 
-Recommended whitelist apps: `sublime_text,org.kde.dolphin`
+Recommended whitelist apps: `sublime_text,org.kde.dolphin` (without spaces!)
 
 ## Checking an application's `resourceClass`
 
